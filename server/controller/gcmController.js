@@ -53,14 +53,11 @@ exports.sendPush = function (req,res,next) {
           contentAvailable: true,
           delayWhileIdle: true,
           data: {
+            title: " hi notification title",
+            subtitle: "hi! ",
             company: 'Creatiosoft',
             location: 'Noida'
-          },
-          notification: {
-            title: " hi notification title",
-            icon: "hi ic_launcher",
-            body: "hi notification body"
-          }
+          }          
     }
 
     // Set up the sender with you API key 
