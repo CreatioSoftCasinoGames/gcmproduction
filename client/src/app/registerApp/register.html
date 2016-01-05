@@ -1,0 +1,51 @@
+
+
+    <section class="primary" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <br><br><br><br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                
+                    <form name="sentMessage" id="contactForm" novalidate="">
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>App Name*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>App Id*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.appId">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-7 pull-right">
+                                <button type="submit" class="btn btn-success btn-lg" ng-click="create()">Register</button>
+                            </div>
+                        </div>
+
+                                               
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+

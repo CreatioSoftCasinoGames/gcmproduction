@@ -4,71 +4,87 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact</h2>
-                    <hr class="star-primary">
+                    <br><br><br><br><br>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                 
                     <form name="sentMessage" id="contactForm" novalidate="">
+
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>model*</label>
-                                <input type="text" class="form-control" ng-model="cars.model">
+                                <div class="col-md-2 nopadding">
+                                    <label>Name*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.name">
+                                </div>
                             </div>
                         </div>
+
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>maker*</label>
-                                <input type="text" class="form-control" ng-model="cars.maker">                               
+                                <div class="col-md-2 nopadding">
+                                    <label>Select app*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select class="form-control" ng-model="data.app">
+                                        <option value="" style="display:none;">Select app from list</option>
+                                        <option ng-repeat="item in appList"  value="{{item}}">{{item}}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>year*</label>
-                                <select class="form-control" ng-model="cars.year">
-                                    <option value="" style="display:none;">Select Year</option>
-                                    <option ng-repeat="item in yearList"  value="{{item}}">{{item}}</option>
-                                </select>
+                                <div class="col-md-2 nopadding">
+                                    <label>Message*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <textarea class="form-control" rows="3" ng-model="data.message"></textarea>
+
+                                </div>
                             </div>
                         </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>price*</label>
-                                <input type="tel" class="form-control" ng-model="cars.price.sellingPrice">
-                                
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Currency*</label>
-                                <select class="form-control" ng-model="cars.price.currency">
-                                    <option value="" style="display:none;">Select Currency</option>
-                                    <option value="INR">Indian</option>
-                                    <option value="USD">Us Dollar</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Image</label>
-                                <select class="form-control" ng-model="cars.image" >
-                                    <option value="" style="display:none;">Select Image</option>
-                                    <option ng-repeat="item in imageList"  value="{{item.name}}">{{item.name}}</option>
-                                  </select>
-                            </div>
-                        </div>
+
                         <br>
                         <div id="success"></div>
                         <div class="row">
-                            <div class="form-group col-xs-6">
-                                <button type="submit" class="btn btn-success btn-lg" ng-click="create()">Save</button>
+                            <div class="form-group col-xs-7 pull-right">
+                                <span ng-hide="showPreview"> <button class="btn btn-success btn-lg" ng-click="preview()">See Preview</button></span>
+                                
+                                <span ng-show="showPreview"><button type="submit" class="btn btn-success btn-lg" ng-click="create()">Send Push</button></span>
                             </div>
-                            <div class="form-group col-xs-6">
-                                <button type="button" class="btn btn-success btn-lg pull-right" ng-click="addImage()">Goto Images Server</button>
-                            </div>
+
                         </div>
+
+                        <div ng-show="showPreview">
+                        
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>Preview</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Registered Email</th>
+                                        <th>Devise Model</th>
+                                        <th>Version</th>
+                                    </tr>
+                                    <tr ng-repeat="user in users">
+                                        <td>{{user.name}}</th>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.model}}</td>
+                                        <td>{{user.version}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>                        
                     </form>
                 </div>
             </div>

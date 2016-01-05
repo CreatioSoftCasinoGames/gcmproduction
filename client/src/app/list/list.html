@@ -1,53 +1,42 @@
-<div class="col-sm-12 search-box">
-    <form class="form-inline">
-      <div class="form-group">
-         <input type="text" class="form-control" placeholder="Model" ng-model="car.model">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Maker" ng-model="car.maker">
-      </div>
-       <div class="form-group">
-         <input type="tel" class="form-control" placeholder="Year" ng-model="car.year">
-      </div>
-       <!-- <div class="form-group">
-       <input type="tel" class="form-control" placeholder="Selling price" ng-model="car.price.sellingPrice">
-      </div> -->
-       <!-- <div class="form-group">
-       <select class="form-control" ng-model="car.price.currency">
-              <option value="" style="display:none;">Select Currency</option>
-              <option value="INR">Indian Rupee</option>
-              <option value="USD">Us Dollar</option>
-        </select>
-      </div> -->
-      <button type="submit" class="btn btn-default" ng-click="search(car)">Search</button>
-      <button class="btn btn-default" ng-click="init()">Search All</button>
-    </form>
+
+<div class="col-sm-12">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+        <div class="col-md-2 nopadding">
+            <label>Select app</label>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" ng-model="data.app">
+                <option value="" style="display:none;">Select app from list</option>
+                <option ng-repeat="item in appList"  value="{{item}}">{{item}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+        <div class="col-md-2 nopadding">
+            <label>Search:</label>
+        </div>
+        <div class="col-md-3">
+             <input type="text" class="form-control" ng-model="searchText">
+        </div>
+    </div>
 </div>
 
 <div class="col-sm-12">
     <table class="table table-striped">
         <tr>
-            <th>Image</th>
-            <th>Model</th>
-            <th>Maker</th>
-            <th>Year</th>
-            <th>Price</th>
+            <th>Push Name</th>
+            <th>Device Name</th>
+            <th>Total Push Send</th>
+            <th>Total linked clicked</th>
         </tr>
-        <tr ng-repeat="car in cars">
-            <td><img ng-src="getImage/{{car.image}}" class="image" /></th>
-            <td>{{car.model}}</td>
-            <td>{{car.maker}}</td>
-            <td>{{car.year}}</td>
-            <td>{{car.listingPrice}}</td>
+        <tr ng-repeat="push in pushList | filter:searchText">
+            <td>{{push.name}}</th>
+            <td>{{push.deviceName}}</td>
+            <td>{{push.totalPush}}</td>
+            <td>{{push.linkClicked}}</td>
         </tr>
     </table>
 </div>
-
-<style>
-    .image{
-        width: 100px;
-    }
-    .search-box{
-        padding: 20px 10px;
-    }
-</style>
