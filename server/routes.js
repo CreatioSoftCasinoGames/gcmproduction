@@ -13,4 +13,7 @@ module.exports = function(app){
     app.route('/appUser/:appId')
     	.get(Gcm.getByAppId);
 
+    app.route('/sendPush')
+		.post(Gcm.sendPush);
+
 }
