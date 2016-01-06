@@ -32,13 +32,17 @@ exports.getByAppId = function (req,res,next) {
 
 exports.create = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
+    console.log(req.body);
     AppUser.createUser(req.body, function(err, data) {
         if (!err) {
+            console.log(data);
             res.json(data);
         } else {
+            console.log(err);
              if (11000 === err.code || 11001 === err.code) {
                     return res.json("duplicate, it already exist").status(403);
             }
+            
             else return res.json(err).status(403); // HTTP 403
         }
     });
@@ -68,13 +72,11 @@ exports.sendPush = function (req,res,next) {
 
     //var GoogleServerAPIKey = 'AIzaSyCPnh643pd2rg4Oig7rRhjKK8J7j4SgWTc'; // Google Server API Key
 
-    if( !req.body.appId ) return res.json("Invalid Request").status(404);
+    if( !req.body.appId || !req.body.apiKey ) return res.json("Invalid Request").status(404);
 
-    var GoogleServerAPIKey = req.body.appId;
+    var GoogleServerAPIKey = req.body.apiKey;
 
-    
-
-    var querry = { appId: GoogleServerAPIKey };
+    var querry = { appId: req.body.appId };
 
     async.waterfall([
         function(callback) {
@@ -92,13 +94,13 @@ exports.sendPush = function (req,res,next) {
               registrationTokens.push(results[i].userDeviceId);
             }
             req.body.totalPush = registrationTokens.length;
+            req.body.linkClicked = 0;
             callback(null, registrationTokens);
         },
         function(registrationTokens, callback) {
           console.log(messageData);
           console.log(GoogleServerAPIKey);
-          console.log(registrationTokens);
-            sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
+          sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
               if(err) {
                 callback("unable to send push notification: "+err);       
               }

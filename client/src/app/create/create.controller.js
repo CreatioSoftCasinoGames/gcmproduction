@@ -16,7 +16,10 @@ Classified.controller('CreateController', ['$scope', '$http','$rootScope',  func
 
     $scope.create = function(){
         var data = $scope.data;   
-        console.log(data);     
+        var obj = $scope.appList.filter(function ( obj ) {
+            return obj.apiKey === data.apiKey;
+        })[0];
+        data.appId = obj.appId;
         $http.post("/sendPush", data)
         .success(function(res){
             alert(res);

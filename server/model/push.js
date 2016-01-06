@@ -37,6 +37,9 @@ pushSchema.statics.createPush = function(requestData, callback) {
     this.create(requestData, callback);
 };
 
+pushSchema.statics.updatePush = function(linkClicked, callback){
+
+};
 
 var push = mongoose.model('push', pushSchema);
 

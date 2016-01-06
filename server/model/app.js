@@ -13,6 +13,8 @@ var appSchema = new Schema({
 
   appId: { type: String, required: true },
 
+  apiKey: { type: String, required: true },
+
   appName : { type: String, required: true },
 
   appVersion : { type: String, required: true },
@@ -24,7 +26,7 @@ var appSchema = new Schema({
 
 
 appSchema.statics.getAppList= function(callback) {
-    this.find({}, { appId: true, appName: true, appVersion: true },callback);
+    this.find({}, { appId: true, appName: true, appVersion: true, apiKey: true },callback);
 };
 
 appSchema.statics.getAppById= function(appId, callback) {

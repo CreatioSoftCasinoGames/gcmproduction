@@ -1,6 +1,4 @@
-
-
-    <section class="primary" id="contact">
+<section class="primary" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -29,9 +27,9 @@
                                     <label>Select app*</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <select class="form-control" ng-model="data.appId">
+                                    <select class="form-control" ng-model="data.apiKey">
                                         <option value="" style="display:none;">Select app from list</option>
-                                        <option ng-repeat="item in appList"  value="{{item.appId}}">{{item.appName}}</option>
+                                        <option ng-repeat="item in appList"  value="{{item.apiKey}}">{{item.appName}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -86,4 +84,3 @@
     </section>
 
 </div>
-

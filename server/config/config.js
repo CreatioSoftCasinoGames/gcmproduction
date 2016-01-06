@@ -10,5 +10,5 @@ module.exports = {
         username: '',
         password: ''
     },
-    mongolaburl: 'mongodb://gauravgupta90:pass123@apollo.modulusmongo.net:27017/avYho3nu'
+    mongolaburl: 'mongodb://gk123:gk123@ds037395.mongolab.com:37395/gcm'
 };
