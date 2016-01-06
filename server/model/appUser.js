@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
 
 var appUserSchema = new Schema({
 
-  appId: { type: String, required: true },
+  appId: { type: String, required: true, unique: true },
   
   userDeviceId : { type: String, required: true },
 
