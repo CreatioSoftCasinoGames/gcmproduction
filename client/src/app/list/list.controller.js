@@ -4,7 +4,15 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
 
     $scope.init = function(){
 
-        $scope.appList = ['app1','app2','app3','app4','app5','app6','app7'];
+        $scope.appList = {};
+
+        $http.get("/app")
+            .success(function(res){
+                $scope.appList = res;
+            }).error(function(err){
+                console.log(err);
+                alert("Opps something went wrong in loading web pages");
+            });
 
         $scope.users = [{
             name: 'gaurav',
@@ -31,25 +39,7 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
             totalPush: '900',
             linkClicked: '800'
         }];
-
-         $http.get("/post")
-        .success(function(data){
-            $scope.cars = data;
-        }).error(function(err){
-
-        })
     }
-
-     $scope.search = function(data){
-         $http.put("/post",data)
-        .success(function(res){
-            $scope.cars = res;
-        }).error(function(err){
-
-        })
-    }
-
-
 
      $scope.init();
 

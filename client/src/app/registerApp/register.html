@@ -18,7 +18,7 @@
                                     <label>App Name*</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" ng-model="data.name">
+                                    <input type="text" class="form-control" ng-model="data.appName">
                                 </div>
                             </div>
                         </div>
@@ -29,6 +29,30 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control" ng-model="data.appId">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>App Version*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.appVersion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>App Environment*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select class="form-control" ng-model="data.appEnvironment">
+                                        <option value="" style="display:none;">Select Environment from list</option>
+                                        <option value="android">Android</option>
+                                        <option value="ios" >Iphone</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
