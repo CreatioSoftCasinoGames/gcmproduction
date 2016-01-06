@@ -32,13 +32,13 @@ You can change the settings in server/config/config.js file
 
 ### API
 
-###### *GET request/ get all users of a perticular app*
+###### *GET request/ Get all users of a perticular app*
 
-    http://localhost:8000/appUser/:appId
+    http://host:port/appUser/:appId
 
-###### *POST appUser/ Create App User*
+###### *POST / Create App User*
 
-    http://localhost:8000/appUser
+    http://host:port/appUser
     
     Body:
 
@@ -60,7 +60,53 @@ You can change the settings in server/config/config.js file
             "_id": "568ba8247ffbefcd1412ed60"
         }
 
+###### *POST / Send Push to all user*
 
+    http://host:port/sendPush
+    
+    Body:
 
+        {
+            "title": "Notification Title",
+            "subtitle": "Notification Subtitle",
+            "link": "http://creatiosoft.com/"
+            "appId": "use appId here"
+        }
+    
 
-		
+    Response:
+
+        Push Successfully sent
+
+###### *POST / Register new app*
+
+     http://host:port/app
+    
+    Body:
+
+        {
+            "appId": "some appId",
+            "appName": "poker",
+            "appVersion": "v1",
+            "appEnvironment": "android"
+        }
+    
+
+    Response:
+
+        {
+            "appId": "some appId",
+            "appName": "poker",
+            "appVersion": "v1",
+            "appEnvironment": "android",
+            "_id": "568cb9caf6b4163b1268ad07"
+        }
+
+###### *GET request/ Get a list of app registered*
+
+    http://host:port/app
+
+###### *GET request/ Get a specification or data of a perticular app registered*
+
+    http://host:port/app/:appId
+

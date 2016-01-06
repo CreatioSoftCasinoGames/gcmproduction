@@ -2,7 +2,8 @@
 
 // Load modules
 
-var Gcm = require('./controller/gcmController');
+var Gcm = require('./controller/gcmController'),
+	App = require('./controller/appController');
 
 // API Server Endpoints
 module.exports = function(app){
@@ -15,5 +16,12 @@ module.exports = function(app){
 
     app.route('/sendPush')
 		.post(Gcm.sendPush);
+
+	app.route('/app')
+		.post(App.create)
+		.get(App.getAppList);
+
+    app.route('/app/:appId')
+    	.get(App.getByAppId);
 
 }

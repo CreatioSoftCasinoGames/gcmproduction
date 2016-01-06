@@ -40,51 +40,45 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <div class="col-md-2 nopadding">
-                                    <label>Message*</label>
+                                    <label>Title*</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <textarea class="form-control" rows="3" ng-model="data.message"></textarea>
-
+                                    <input type="text" class="form-control" ng-model="data.title">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>Subtitle*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.subtitle">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <div class="col-md-2 nopadding">
+                                    <label>Link*</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" ng-model="data.link">
+                                </div>
+                            </div>
+                        </div>                     
 
                         <br>
                         <div id="success"></div>
                         <div class="row">
-                            <div class="form-group col-xs-7 pull-right">
-                                <span ng-hide="showPreview"> <button class="btn btn-success btn-lg" ng-click="preview()">See Preview</button></span>
-                                
-                                <span ng-show="showPreview"><button type="submit" class="btn btn-success btn-lg" ng-click="create()">Send Push</button></span>
+                            <div class="form-group col-xs-7 pull-right">                               
+                               <button type="submit" class="btn btn-success btn-lg" ng-click="create()">Send Push</button></span>
                             </div>
 
                         </div>
-
-                        <div ng-show="showPreview">
-                        
-                            <div class="row control-group">
-                                <div class="form-group col-xs-12 floating-label-form-group controls">
-                                    <label>Preview</label>
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-12">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>Registered Email</th>
-                                        <th>Devise Model</th>
-                                        <th>Version</th>
-                                    </tr>
-                                    <tr ng-repeat="user in users">
-                                        <td>{{user.name}}</th>
-                                        <td>{{user.email}}</td>
-                                        <td>{{user.model}}</td>
-                                        <td>{{user.version}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>                        
+                      
                     </form>
                 </div>
             </div>

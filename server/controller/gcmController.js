@@ -53,10 +53,9 @@ exports.sendPush = function (req,res,next) {
           contentAvailable: true,
           delayWhileIdle: true,
           data: {
-            title: " hi notification title",
-            subtitle: "hi! ",
-            company: 'Creatiosoft',
-            location: 'Noida'
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            link: req.body.link
           }          
     }
 
@@ -69,11 +68,22 @@ exports.sendPush = function (req,res,next) {
 
     var registrationTokens = ['APA91bF5wuz7eqcBVhzILeDhYie5aWni9fIZB4BEDzrDeTQZuz-1AoECZKiwMTBgiBsKrACLm8kZVMasOhNmJi1_iVBEY4xYWZDTJ-L-8QHB807keoNPIZjrpzpvWNu6Arz2WHfY9Q9b'];
 
-    sendPush(messageData, GoogleServerAPIKey, registrationTokens);
+    sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
+      if(err) {
+        console.log("Error...");
+        console.log(err);
+        return res.json(err).status(403);        
+      }
+      else {
+        console.log("Success...");
+        console.log(response)
+        return res.json("Push Successfully sent");
+      }
+    });
 };
 
 // This function is responsible to send push notification.
-function sendPush(messageData, GoogleServerAPIKey, registrationTokens){
+function sendPush(messageData, GoogleServerAPIKey, registrationTokens, callback){
 
   // Create a message with given value
     var message = new gcm.Message(messageData);
@@ -81,16 +91,7 @@ function sendPush(messageData, GoogleServerAPIKey, registrationTokens){
     // Set up the sender with you API key 
     var sender = new gcm.Sender(GoogleServerAPIKey);
 
-    sender.send(message, { registrationTokens: registrationTokens }, function (err, response) {
-      if(err) {
-        console.log("Error...");
-        console.log(err);
-      }
-      else {
-        console.log("Result...");
-        console.log(response);
-      }
-    });
+    sender.send(message, { registrationTokens: registrationTokens }, callback);
 }
 
 

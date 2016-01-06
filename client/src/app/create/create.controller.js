@@ -20,31 +20,18 @@ Classified.controller('CreateController', ['$scope', '$http','$rootScope',  func
     }
 
     $scope.create = function(){
-
         console.log($scope.data);
-        alert($scope.data);
-        // var data = $scope.cars;
-        // if(data && data.model && data.maker && data.year && data.price.sellingPrice && data.price.currency){
-        //     $http.post("/post", data)
-        //     .success(function(res){
-        //         alert("Post successfully created. Your reference id is "+res.refId);
-        //         window.location="http://localhost:8000";
-        //     }).error(function(err){
-
-        //     })
-        // }
-        // else{
-        //     alert("Please fill the required field");
-        // }
+        var data = $scope.data;
         
-    }
-
-    $scope.preview = function(){
-        $scope.showPreview = 1;
-    }
-
-    $scope.addImage = function(){
-        window.open('http://localhost:8000/uploadfile', '_blank');
+        $http.post("/sendPush", data)
+        .success(function(res){
+            alert(res);
+        }).error(function(err){
+            console.log(err);
+            alert("Unable to send push. Something went wrong");
+        })
+       
+        
     }
 
     $scope.init();
