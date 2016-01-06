@@ -67,10 +67,11 @@ You can change the settings in server/config/config.js file
     Body:
 
         {
+           "pushName": "push1",
             "title": "Notification Title",
             "subtitle": "Notification Subtitle",
-            "link": "http://creatiosoft.com/"
-            "appId": "use appId here"
+            "link": "http://creatiosoft.com/",
+            "appId": "app111"
         }
     
 
@@ -109,4 +110,8 @@ You can change the settings in server/config/config.js file
 ###### *GET request/ Get a specification or data of a perticular app registered*
 
     http://host:port/app/:appId
+
+###### *GET request/ Get a list of push of a perticular registered app*
+
+    http://host:port/push/:appId
 

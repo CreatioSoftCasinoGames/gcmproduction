@@ -14,6 +14,7 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
                 alert("Opps something went wrong in loading web pages");
             });
 
+
         $scope.users = [{
             name: 'gaurav',
             email: 'gauravgupta@creatiosoft.com',
@@ -39,6 +40,18 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
             totalPush: '900',
             linkClicked: '800'
         }];
+    }
+
+    $scope.onSelectAppId = function(){
+        var appId = $scope.appId;   
+        console.log(appId);     
+        $http.get("/appUser/"+appId)
+        .success(function(res){
+            console.log(res);
+         }).error(function(err){
+            console.log(err);
+            alert("Unable to send push. Something went wrong");
+        });
     }
 
      $scope.init();

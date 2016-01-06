@@ -3,7 +3,8 @@
 // Load modules
 
 var Gcm = require('./controller/gcmController'),
-	App = require('./controller/appController');
+	App = require('./controller/appController'),
+	Push = require('./controller/pushController');
 
 // API Server Endpoints
 module.exports = function(app){
@@ -23,5 +24,11 @@ module.exports = function(app){
 
     app.route('/app/:appId')
     	.get(App.getByAppId);
+
+    app.route('/push')
+		.post(Push.create);
+
+    app.route('/push/:appId')
+    	.get(Push.getPushListByAppId);
 
 }
