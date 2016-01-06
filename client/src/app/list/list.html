@@ -28,13 +28,13 @@
     <table class="table table-striped">
         <tr>
             <th>Push Name</th>
-            <th>Device Name</th>
+            <th>Title</th>
             <th>Total Push Send</th>
             <th>Total linked clicked</th>
         </tr>
         <tr ng-repeat="push in pushList | filter:searchText">
             <td>{{push.name}}</th>
-            <td>{{push.deviceName}}</td>
+            <td>{{push.title}}</td>
             <td>{{push.totalPush}}</td>
             <td>{{push.linkClicked}}</td>
         </tr>

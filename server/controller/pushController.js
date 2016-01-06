@@ -19,21 +19,3 @@ exports.getPushListByAppId = function (req,res,next) {
     });
 };
 
-/**
-   POST: /push
- */
-
-exports.create = function (req,res,next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    Push.createPush(req.body, function(err, data) {
-        if (!err) {
-            res.json(data);
-        } else {
-             if (11000 === err.code || 11001 === err.code) {
-                    return res.json("duplicate, it already exist").status(403);
-            }
-            else return res.json(err).status(403); // HTTP 403
-        }
-    });
-};
-

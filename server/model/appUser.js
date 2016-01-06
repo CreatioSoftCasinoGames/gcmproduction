@@ -17,6 +17,10 @@ var appUserSchema = new Schema({
 
   appVersion : { type: String, required: true },
 
+  osVersion: { type: String },
+
+  location: { type: String },
+
   appEnvironment : { type: String }
   
 });
@@ -25,6 +29,10 @@ var appUserSchema = new Schema({
 
 appUserSchema.statics.getUser= function(querry, callback) {
     this.find(querry, callback);
+};
+
+appUserSchema.statics.getUserDeviceIdByAppId= function(querry, callback) {
+    this.find(querry, { userDeviceId: 1, _id: 0 }, callback);
 };
 
 appUserSchema.statics.createUser = function(requestData, callback) {

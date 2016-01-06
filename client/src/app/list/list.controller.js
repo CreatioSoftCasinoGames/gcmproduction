@@ -14,43 +14,18 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
                 alert("Opps something went wrong in loading web pages");
             });
 
-
-        $scope.users = [{
-            name: 'gaurav',
-            email: 'gauravgupta@creatiosoft.com',
-            model: 'Nokia X',
-            version: 'v1'
-        },
-        {
-            name: 'nishank',
-            email: 'nishank@creatiosoft.com',
-            model: 'I phone',
-            version: 'v1'
-        }];
-
-        $scope.pushList = [{
-            name: 'push1',
-            deviceName: 'device1',
-            totalPush: '1000',
-            linkClicked: '700'
-        },
-        {
-            name: 'ps2',
-            deviceName: 'dv2',
-            totalPush: '900',
-            linkClicked: '800'
-        }];
+        $scope.pushList = [];
     }
 
     $scope.onSelectAppId = function(){
         var appId = $scope.appId;   
         console.log(appId);     
-        $http.get("/appUser/"+appId)
+        $http.get("/push/"+appId)
         .success(function(res){
-            console.log(res);
+             $scope.pushList = res;
          }).error(function(err){
             console.log(err);
-            alert("Unable to send push. Something went wrong");
+            alert("Unable to get list of push for selected app");
         });
     }
 

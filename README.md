@@ -46,6 +46,8 @@ You can change the settings in server/config/config.js file
             "appId": "app1",        // required
             "userDeviceId": "usd1", // required
             "appVersion": "v1",     // required
+            "osVersion": "Android v1",
+            "location": "india",
             "appEnvironment": "android"
         }
 	
@@ -56,6 +58,8 @@ You can change the settings in server/config/config.js file
             "appId": "app1",
             "userDeviceId": "usd1",
             "appVersion": "v1",
+            "osVersion": "Android v1",
+            "location": "india",
             "appEnvironment": "android",
             "_id": "568ba8247ffbefcd1412ed60"
         }

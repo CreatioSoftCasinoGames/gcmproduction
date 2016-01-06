@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
 
 var pushSchema = new Schema({
 
-  pushName: { type: String, required: true },
+  name: { type: String, required: true },
 
   appId: { type: String, required: true },
 

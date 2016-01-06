@@ -1,7 +1,9 @@
 'use strict';
 
 var AppUser = require('../model/appUser').appUser,
-    gcm = require('node-gcm');
+    Push = require('../model/push').push,
+    gcm = require('node-gcm'),
+    async = require('async');
 
 
 
@@ -48,6 +50,9 @@ exports.create = function (req,res,next) {
 
 exports.sendPush = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
+
+    console.log(req.body);
+
     var messageData = {
           priority: 'high',
           contentAvailable: true,
@@ -61,25 +66,96 @@ exports.sendPush = function (req,res,next) {
 
     // Set up the sender with you API key 
 
-    var GoogleServerAPIKey = 'AIzaSyCPnh643pd2rg4Oig7rRhjKK8J7j4SgWTc'; // Google Server API Key
+    //var GoogleServerAPIKey = 'AIzaSyCPnh643pd2rg4Oig7rRhjKK8J7j4SgWTc'; // Google Server API Key
+
+    if( !req.body.appId ) return res.json("Invalid Request").status(404);
+
+    var GoogleServerAPIKey = req.body.appId;
+
+    
+
+    var querry = { appId: GoogleServerAPIKey };
+
+    async.waterfall([
+        function(callback) {
+            AppUser.getUserDeviceIdByAppId(querry, function(err, result) {
+              if (!err) {
+                  callback(null, result);
+              } else {
+                  callback("unable to get user list");
+              }
+            });
+        },
+        function(results, callback) {
+            var registrationTokens = [];
+            for(var i=0; i<results.length; i++){
+              registrationTokens.push(results[i].userDeviceId);
+            }
+            req.body.totalPush = registrationTokens.length;
+            callback(null, registrationTokens);
+        },
+        function(registrationTokens, callback) {
+          console.log(messageData);
+          console.log(GoogleServerAPIKey);
+          console.log(registrationTokens);
+            sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
+              if(err) {
+                callback("unable to send push notification: "+err);       
+              }
+              else {
+                callback(null, response)
+              }
+            });
+           
+        }
+    ], function (err, result) {
+        if(err){
+            return res.json(err).status(403);
+        }
+        else{
+            if(result.success){
+                Push.createPush(req.body, function(err, data) {
+                    if (!err) {
+                        res.json(data);
+                    } else {
+                         if (11000 === err.code || 11001 === err.code) {
+                                return res.json("duplicate, it already exist").status(403);
+                        }
+                        else return res.json(err).status(403); // HTTP 403
+                    }
+                });
+            }
+            else{
+                return res.json("unable to send push notification: as no device registered"); 
+            }            
+        }
+    });
+
+
+
+    
+
+    
+
+    
 
     // Add the registration tokens of the devices you want to send to    
     //Ex: var registrationTokens = ['APA91bHfadVJSU_uIhHMFBnkYFUGK65JNED0xfmiZ7-h3tufNl1rJNFN3neluWIy9GlesEFbVDyd5IP351pKg64wP0Ik9wU35tbeNV7JdZKf5BsCk3YY19-oavpAv5E1mzc6KbqOykC2'];
 
-    var registrationTokens = ['APA91bF5wuz7eqcBVhzILeDhYie5aWni9fIZB4BEDzrDeTQZuz-1AoECZKiwMTBgiBsKrACLm8kZVMasOhNmJi1_iVBEY4xYWZDTJ-L-8QHB807keoNPIZjrpzpvWNu6Arz2WHfY9Q9b'];
+    // var registrationTokens = ['APA91bF5wuz7eqcBVhzILeDhYie5aWni9fIZB4BEDzrDeTQZuz-1AoECZKiwMTBgiBsKrACLm8kZVMasOhNmJi1_iVBEY4xYWZDTJ-L-8QHB807keoNPIZjrpzpvWNu6Arz2WHfY9Q9b'];
 
-    sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
-      if(err) {
-        console.log("Error...");
-        console.log(err);
-        return res.json(err).status(403);        
-      }
-      else {
-        console.log("Success...");
-        console.log(response)
-        return res.json("Push Successfully sent");
-      }
-    });
+    // sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
+    //   if(err) {
+    //     console.log("Error...");
+    //     console.log(err);
+    //     return res.json(err).status(403);        
+    //   }
+    //   else {
+    //     console.log("Success...");
+    //     console.log(response)
+    //     return res.json("Push Successfully sent");
+    //   }
+    // });
 };
 
 // This function is responsible to send push notification.

@@ -25,9 +25,6 @@ module.exports = function(app){
     app.route('/app/:appId')
     	.get(App.getByAppId);
 
-    app.route('/push')
-		.post(Push.create);
-
     app.route('/push/:appId')
     	.get(Push.getPushListByAppId);
 
