@@ -19,3 +19,12 @@ exports.getPushListByAppId = function (req,res,next) {
     });
 };
 
+
+/**
+   GET: /linkClick/appId
+ */
+
+exports.registerLinkClick = function (req,res,next) {
+    console.log(req.params.appId);
+    return res.json("Sucessfully updated");
+};

@@ -28,4 +28,7 @@ module.exports = function(app){
     app.route('/push/:appId')
     	.get(Push.getPushListByAppId);
 
+    app.route('/linkClick/:appId')
+    	.get(Push.registerLinkClick);
+
 }
