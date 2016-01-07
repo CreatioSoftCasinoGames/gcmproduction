@@ -119,7 +119,14 @@ You can change the settings in server/config/config.js file
 
     http://host:port/push/:appId
 
-###### *GET request/ Record number of link clicked for a push*
+###### *POST request/ Record number of link clicked for a push*
 
-    http://host:port/linkClick/:pushName
+    http://host:port/linkClick
+
+    Body:
+
+        {
+            "pushName": "push1",
+        }
+
 

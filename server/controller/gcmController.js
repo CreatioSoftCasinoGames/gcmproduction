@@ -70,6 +70,8 @@ exports.sendPush = function (req,res,next) {
 
     if( !req.body.appId || !req.body.apiKey || !req.body.title || !req.body.subtitle || !req.body.link || !req.body.name ) return res.json("Invalid Request").status(404);
 
+    if(!validateUrl(req.body.link)) return res.json("Invalid url").status(404);
+    
     var GoogleServerAPIKey = req.body.apiKey;
 
     var querry = { appId: req.body.appId };
@@ -157,5 +159,10 @@ function sendPush(messageData, GoogleServerAPIKey, registrationTokens, callback)
 
     sender.send(message, { registrationTokens: registrationTokens }, callback);
 }
+
+function validateUrl(s) {    
+      var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+      return regexp.test(s);    
+ }
 
 
