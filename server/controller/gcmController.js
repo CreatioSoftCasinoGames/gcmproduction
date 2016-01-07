@@ -34,15 +34,14 @@ exports.create = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
     AppUser.createUser(req.body, function(err, data) {
         if (!err) {
-            console.log(data);
-            res.json(data);
+            res.json("Successfully created");
         } else {
             console.log(err);
              if (11000 === err.code || 11001 === err.code) {
                     return res.json("duplicate, it already exist").status(403);
             }
             
-            else return res.json(err).status(403); // HTTP 403
+            else return res.json("error in creation").status(403); // HTTP 403
         }
     });
 };
@@ -76,6 +75,19 @@ exports.sendPush = function (req,res,next) {
     var querry = { appId: req.body.appId };
 
     async.waterfall([
+        function(callback) {
+            Push.getPushByName(req.body.name, function(err, result) {
+              if (!err) {
+                  if(result){
+                    callback("Duplicate Name: Please select another name");
+                  }
+                  else
+                    callback(null);
+              } else {
+                  callback("unable to check name");
+              }              
+            });
+        },
         function(callback) {
             AppUser.getUserDeviceIdByAppId(querry, function(err, result) {
               if (!err) {
@@ -118,7 +130,7 @@ exports.sendPush = function (req,res,next) {
                          if (11000 === err.code || 11001 === err.code) {
                                 return res.json("duplicate, it already exist").status(403);
                         }
-                        else return res.json(err).status(403); // HTTP 403
+                        else return res.json("push send but unable to record").status(403); // HTTP 403
                     }
                 });
             }

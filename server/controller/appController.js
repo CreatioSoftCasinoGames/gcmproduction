@@ -44,12 +44,12 @@ exports.create = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
     App.createApp(req.body, function(err, data) {
         if (!err) {
-            res.json(data);
+            res.json("sucessfully created");
         } else {
              if (11000 === err.code || 11001 === err.code) {
                     return res.json("duplicate, it already exist").status(403);
             }
-            else return res.json(err).status(403); // HTTP 403
+            else return res.json("error in creation").status(403); // HTTP 403
         }
     });
 };

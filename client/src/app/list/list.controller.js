@@ -10,8 +10,7 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
             .success(function(res){
                 $scope.appList = res;
             }).error(function(err){
-                console.log(err);
-                alert("Opps something went wrong in loading web pages");
+                alert(err);
             });
 
         $scope.pushList = [];
@@ -19,13 +18,11 @@ Classified.controller('ListController', ['$scope', '$http','$rootScope', functio
 
     $scope.onSelectAppId = function(){
         var appId = $scope.appId;   
-        console.log(appId);     
         $http.get("/push/"+appId)
         .success(function(res){
              $scope.pushList = res;
          }).error(function(err){
-            console.log(err);
-            alert("Unable to get list of push for selected app");
+            alert(err);
         });
     }
 

@@ -7,8 +7,7 @@ Classified.controller('CreateController', ['$scope', '$http','$rootScope',  func
         .success(function(res){
             $scope.appList = res;
         }).error(function(err){
-            console.log(err);
-            alert("Opps something went wrong in loading web pages");
+            alert(err);
         });
     }
 
@@ -19,14 +18,12 @@ Classified.controller('CreateController', ['$scope', '$http','$rootScope',  func
         data.apiKey = JSON.parse(data.apiKey);
         data.appId = data.apiKey.appId;
         data.apiKey = data.apiKey.apiKey;
-        console.log(data);
         $http.post("/sendPush", data)
         .success(function(res){
             alert(res);
             $scope.data = {};
         }).error(function(err){
-            console.log(err);
-            alert("Unable to send push. Something went wrong");
+             alert(err);
         });
     }
 

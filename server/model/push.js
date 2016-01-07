@@ -33,6 +33,10 @@ pushSchema.statics.getPushListByAppId= function(appId, callback) {
     this.find({ appId: appId }, callback);
 };
 
+pushSchema.statics.getPushByName= function(Pushname, callback) {
+    this.findOne({ name: Pushname } ,callback);
+}
+
 pushSchema.statics.createPush = function(requestData, callback) {
     this.create(requestData, callback);
 };
