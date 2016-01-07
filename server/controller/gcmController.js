@@ -32,7 +32,6 @@ exports.getByAppId = function (req,res,next) {
 
 exports.create = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
-    console.log(req.body);
     AppUser.createUser(req.body, function(err, data) {
         if (!err) {
             console.log(data);
@@ -54,8 +53,6 @@ exports.create = function (req,res,next) {
 
 exports.sendPush = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
-
-    console.log(req.body);
 
     var messageData = {
           priority: 'high',
@@ -98,8 +95,6 @@ exports.sendPush = function (req,res,next) {
             callback(null, registrationTokens);
         },
         function(registrationTokens, callback) {
-          console.log(messageData);
-          console.log(GoogleServerAPIKey);
           sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
               if(err) {
                 callback("Unable to send push notification: "+err);       
@@ -131,33 +126,12 @@ exports.sendPush = function (req,res,next) {
                 return res.json("unable to send push notification: as no device registered"); 
             }            
         }
-    });
-
-
-
-    
-
-    
-
-    
+    });    
 
     // Add the registration tokens of the devices you want to send to    
     //Ex: var registrationTokens = ['APA91bHfadVJSU_uIhHMFBnkYFUGK65JNED0xfmiZ7-h3tufNl1rJNFN3neluWIy9GlesEFbVDyd5IP351pKg64wP0Ik9wU35tbeNV7JdZKf5BsCk3YY19-oavpAv5E1mzc6KbqOykC2'];
 
     // var registrationTokens = ['APA91bF5wuz7eqcBVhzILeDhYie5aWni9fIZB4BEDzrDeTQZuz-1AoECZKiwMTBgiBsKrACLm8kZVMasOhNmJi1_iVBEY4xYWZDTJ-L-8QHB807keoNPIZjrpzpvWNu6Arz2WHfY9Q9b'];
-
-    // sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
-    //   if(err) {
-    //     console.log("Error...");
-    //     console.log(err);
-    //     return res.json(err).status(403);        
-    //   }
-    //   else {
-    //     console.log("Success...");
-    //     console.log(response)
-    //     return res.json("Push Successfully sent");
-    //   }
-    // });
 };
 
 // This function is responsible to send push notification.
