@@ -53,7 +53,6 @@ exports.create = function (req,res,next) {
 
 exports.sendPush = function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
-
     var messageData = {
           priority: 'high',
           contentAvailable: true,
@@ -61,7 +60,8 @@ exports.sendPush = function (req,res,next) {
           data: {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            link: req.body.link
+            link: req.body.link,
+            pushName: req.body.name
           }          
     }
 

@@ -15,7 +15,7 @@ var appSchema = new Schema({
 
   apiKey: { type: String, required: true },
 
-  appName : { type: String, required: true },
+  appName : { type: String, required: true, unique: true },
 
   appVersion : { type: String, required: true },
 
