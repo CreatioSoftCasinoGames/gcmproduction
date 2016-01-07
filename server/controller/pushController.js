@@ -21,13 +21,13 @@ exports.getPushListByAppId = function (req,res,next) {
 
 
 /**
-   GET: /linkClick/pushName
+   GET: /linkClick
  */
 
 exports.registerLinkClick = function (req,res,next) {
-    console.log(req.params.pushName);
-    if( !req.params.pushName ) return res.json("Invalid Request").status(404);
-    Push.updatePush(req.params.pushName, function(err, result) {
+    console.log(req.body.pushName);
+    if( !req.body.pushName ) return res.json("Invalid Request").status(404);
+    Push.updatePush(req.body.pushName, function(err, result) {
       if (!err) {
           res.json("Successfully");
       } else {

@@ -68,7 +68,7 @@ exports.sendPush = function (req,res,next) {
 
     //var GoogleServerAPIKey = 'AIzaSyCPnh643pd2rg4Oig7rRhjKK8J7j4SgWTc'; // Google Server API Key
 
-    if( !req.body.appId || !req.body.apiKey ) return res.json("Invalid Request").status(404);
+    if( !req.body.appId || !req.body.apiKey || !req.body.title || !req.body.subtitle || !req.body.link || !req.body.name ) return res.json("Invalid Request").status(404);
 
     var GoogleServerAPIKey = req.body.apiKey;
 
