@@ -102,7 +102,7 @@ exports.sendPush = function (req,res,next) {
           console.log(GoogleServerAPIKey);
           sendPush(messageData, GoogleServerAPIKey, registrationTokens, function (err, response) {
               if(err) {
-                callback("unable to send push notification: "+err);       
+                callback("Unable to send push notification: "+err);       
               }
               else {
                 callback(null, response)
@@ -118,7 +118,7 @@ exports.sendPush = function (req,res,next) {
             if(result.success){
                 Push.createPush(req.body, function(err, data) {
                     if (!err) {
-                        res.json(data);
+                        res.json("Push Successfully Send");
                     } else {
                          if (11000 === err.code || 11001 === err.code) {
                                 return res.json("duplicate, it already exist").status(403);
