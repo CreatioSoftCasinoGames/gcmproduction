@@ -31,12 +31,14 @@
             <th>Title</th>
             <th>Total Push Sent</th>
             <th>Total link clicked</th>
+            <th></th>
         </tr>
         <tr ng-repeat="push in pushList | filter:searchText">
             <td>{{push.name}}</th>
             <td>{{push.title}}</td>
             <td>{{push.totalPush}}</td>
             <td>{{push.linkClicked}}</td>
+            <td><button type="button" class="btn btn-danger" ng-click="delete(push.name)">Delete</button></td>
         </tr>
     </table>
 </div>
