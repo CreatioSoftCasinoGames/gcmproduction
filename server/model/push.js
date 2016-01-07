@@ -41,6 +41,10 @@ pushSchema.statics.createPush = function(requestData, callback) {
     this.create(requestData, callback);
 };
 
+pushSchema.statics.removePush = function(pushName, callback) {
+    this.remove({ name: pushName }, callback);
+};
+
 pushSchema.statics.updatePush = function(pushName, callback){
     this.update(
        { name: pushName},

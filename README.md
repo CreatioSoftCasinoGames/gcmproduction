@@ -129,4 +129,8 @@ You can change the settings in server/config/config.js file
             "pushName": "push1",
         }
 
+###### *Delete request/ remove a perticular push by name*
+
+    http://host:port/push/:name
+
 

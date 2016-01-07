@@ -28,6 +28,9 @@ module.exports = function(app){
     app.route('/push/:appId')
     	.get(Push.getPushListByAppId);
 
+    app.route('/push/:name')
+        .delete(Push.removePush);
+
     app.route('/linkClick')
     	.post(Push.registerLinkClick);
 
