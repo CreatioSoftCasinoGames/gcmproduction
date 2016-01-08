@@ -13,7 +13,9 @@ var appUserSchema = new Schema({
 
   appId: { type: String, required: true },
   
-  userDeviceId : { type: String, required: true, unique: true },
+  userDeviceId : { type: String, required: true },
+
+  uuid : { type: String, required: true, unique: true },
 
   appVersion : { type: String, required: true },
 
@@ -36,7 +38,14 @@ appUserSchema.statics.getUserDeviceIdByAppId= function(querry, callback) {
 };
 
 appUserSchema.statics.createUser = function(requestData, callback) {
-    this.create(requestData, callback);
+    this.update({uuid: requestData.uuid}, requestData, {upsert: true}, callback);
+};
+
+appUserSchema.statics.updateUserDeviceId = function(userDeviceId, callback){
+    this.update(
+       { name: pushName},
+       { $inc: { linkClicked: 1 } },
+       callback);
 };
 
 
