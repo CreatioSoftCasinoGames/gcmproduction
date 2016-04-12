@@ -70,7 +70,8 @@ exports.sendPush = function (req,res,next) {
 
     if( !req.body.appId || !req.body.apiKey || !req.body.title || !req.body.subtitle || !req.body.link || !req.body.name ) return res.json("Invalid Request").status(404);
 
-    if(!validateUrl(req.body.link)) return res.json("Invalid url").status(404);
+    // asked to remove url validation
+    //if(!validateUrl(req.body.link)) return res.json("Invalid url").status(404);
     
     var GoogleServerAPIKey = req.body.apiKey;
 
